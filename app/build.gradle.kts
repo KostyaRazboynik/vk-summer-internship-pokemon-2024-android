@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    namespace = "com.kostyarazboynk.pokemon"
+    namespace = "com.kostyarazboynik.pokemon"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.kostyarazboynk.pokemon"
-        minSdk = 24
+        applicationId = "com.kostyarazboynik.pokemon"
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -45,10 +45,20 @@ secrets {
 }
 
 dependencies {
+    implementation(project(":core:dagger"))
+    implementation(project(":core:utils"))
+    implementation(project(":domain"))
+    implementation(project(":features:feature-pokemon-details"))
+    implementation(project(":features:feature-pokemon-list"))
+    implementation(project(":pokemon-api"))
 
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
+
+    // dagger dependency injection pattern
+    kapt(libs.dagger.compiler)
+    annotationProcessor(libs.dagger.processor)
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp)
+    debugImplementation(libs.okhttp.logging.interceptor)
 }
