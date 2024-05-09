@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.kostyarazboynik.dagger.FeatureScope
-import com.kostyarazboynik.domain.model.Pokemon
+import com.kostyarazboynik.domain.model.pokemon.Pokemon
 import com.kostyarazboynik.domain.usecase.LoadPokemonUseCase
 import com.kostyarazboynik.utils.extensions.launchNamed
 import kotlinx.coroutines.Dispatchers

@@ -7,26 +7,26 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kostyarazboynik.feature_pokemon_list.databinding.NetworkStateItemLayoutBinding
+import com.kostyarazboynik.utils.Logger
 
-
-class LoadingStateAdapter(private val retry: () -> Unit) :
+class LoadingStateAdapter(private val retryCallBack: () -> Unit) :
     LoadStateAdapter<LoadingStateAdapter.LoadStateViewHolder>() {
 
     override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) {
-        val progress = holder.binding.progressBarItem
-        val txtErrorMessage = holder.binding.errorMsgItem
-        val errorBtn = holder.binding.retryBtn
+        with(holder.binding) {
+            progressBar.isVisible = loadState is LoadState.Loading
+            errorMessage.isVisible = loadState is LoadState.Error
+            retry.isVisible = loadState is LoadState.Error
 
-        progress.isVisible = loadState is LoadState.Loading
-        txtErrorMessage.isVisible = loadState is LoadState.Error
-        errorBtn.isVisible = loadState is LoadState.Error
+            if (loadState is LoadState.Error) {
+                errorMessage.text = loadState.error.localizedMessage
+            }
+            retry.setOnClickListener {
+                retryCallBack()
+            }
+        }
 
-        if (loadState is LoadState.Error) {
-            txtErrorMessage.text = loadState.error.localizedMessage
-        }
-        errorBtn.setOnClickListener {
-            retry.invoke()
-        }
+        Logger.d(TAG, loadState.toString())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder =
@@ -40,4 +40,8 @@ class LoadingStateAdapter(private val retry: () -> Unit) :
 
     class LoadStateViewHolder(val binding: NetworkStateItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root)
+
+    private companion object {
+        private const val TAG = "LoadingStateAdapter"
+    }
 }

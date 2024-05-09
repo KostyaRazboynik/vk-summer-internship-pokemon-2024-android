@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class StatsDto(
     @SerialName("base_stat") val baseStat: Int,
     @SerialName("effort") val effort: Int,
-    @SerialName("stat") val stat: StatDto
+    @SerialName("stat") val stat: StatDto,
 )

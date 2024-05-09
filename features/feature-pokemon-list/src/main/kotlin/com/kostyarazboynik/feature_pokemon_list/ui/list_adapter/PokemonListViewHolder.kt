@@ -12,27 +12,22 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.kostyarazboynik.domain.model.Pokemon
+import com.kostyarazboynik.domain.model.pokemon.Pokemon
 import com.kostyarazboynik.feature_pokemon_list.R
 import com.kostyarazboynik.feature_pokemon_list.databinding.PokemonListItemLayoutBinding
-import com.kostyarazboynik.feature_pokemon_list.ui.list_adapter.utils.getPicUrl
-import java.util.Locale
+import com.kostyarazboynik.utils.extensions.capitalizeEx
+import com.kostyarazboynik.utils.extensions.getPicUrl
 
 class PokemonListViewHolder(
     private val binding: PokemonListItemLayoutBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(pokemon: Pokemon) {
-        binding.apply {
-            pokemonTitle.text = pokemon.name.replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale.getDefault())
-                else it.toString()
-            }
-            loadImage(pokemon)
-        }
+    fun bind(pokemon: Pokemon): String {
+        binding.pokemonTitle.text = pokemon.name.capitalizeEx()
+        return loadImage(pokemon)
     }
 
-    private fun loadImage(pokemon: Pokemon) {
+    private fun loadImage(pokemon: Pokemon): String {
         val picture = pokemon.url.getPicUrl()
 
         binding.apply {
@@ -75,5 +70,7 @@ class PokemonListViewHolder(
                 })
                 .into(pokemonImage)
         }
+
+        return picture
     }
 }

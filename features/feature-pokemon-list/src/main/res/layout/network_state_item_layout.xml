@@ -7,7 +7,7 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/error_msg_item"
+        android:id="@+id/errorMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -18,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/retry_btn"
+        android:id="@+id/retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/error_msg_item"
+        android:layout_below="@+id/errorMessage"
         android:layout_centerHorizontal="true"
         android:paddingBottom="8dp"
         android:text="@string/retry"
@@ -29,14 +29,14 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/error_msg_item" />
+        app:layout_constraintTop_toBottomOf="@id/errorMessage" />
 
     <ProgressBar
-        android:id="@+id/progress_bar_item"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/error_msg_item"
+        android:layout_below="@+id/errorMessage"
         android:layout_gravity="center"
         android:paddingBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"

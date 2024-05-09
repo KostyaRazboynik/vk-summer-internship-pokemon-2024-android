@@ -3,13 +3,13 @@ package com.kostyarazboynik.feature_pokemon_list.ui.list_adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import com.kostyarazboynik.domain.model.Pokemon
+import com.kostyarazboynik.domain.model.pokemon.Pokemon
 import com.kostyarazboynik.feature_pokemon_list.databinding.PokemonListItemLayoutBinding
 import com.kostyarazboynik.feature_pokemon_list.ui.list_adapter.diffutil.PokemonListDiffUtilCallback
 
 class PokemonListAdapter(
-    private val onPokemonClickCallBack: (Pokemon) -> Unit,
-): PagingDataAdapter<Pokemon, PokemonListViewHolder>(PokemonListDiffUtilCallback()) {
+    private val onPokemonClickCallBack: (Pokemon, String?) -> Unit,
+) : PagingDataAdapter<Pokemon, PokemonListViewHolder>(PokemonListDiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonListViewHolder =
         PokemonListViewHolder(
@@ -24,9 +24,9 @@ class PokemonListAdapter(
         val pokemon = getItem(position)
         holder.apply {
             pokemon?.let {
-                bind(pokemon)
+                val picture = bind(pokemon)
                 itemView.setOnClickListener {
-                    onPokemonClickCallBack(pokemon)
+                    onPokemonClickCallBack(pokemon, picture)
                 }
             }
         }
@@ -41,7 +41,6 @@ class PokemonListAdapter(
     }
 
     companion object {
-        private const val TAG = "PokemonListAdapter"
         const val NETWORK_VIEW_TYPE = 2
         const val PRODUCT_VIEW_TYPE = 1
     }

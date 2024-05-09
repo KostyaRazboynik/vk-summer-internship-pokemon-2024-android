@@ -34,6 +34,6 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.swiperefreshlayout)
 
-    // coil image loader
-    implementation(libs.coil)
+    // glide image loader
+    implementation(libs.glide)
 }

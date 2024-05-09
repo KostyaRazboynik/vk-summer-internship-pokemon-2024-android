@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pokemon_image_height">150dp</dimen>
+    <dimen name="card_side_margin">10dp</dimen>
+    <dimen name="card_bottom_margin">24dp</dimen>
+    <dimen name="card_top_margin">5dp</dimen>
+    <dimen name="card_corner_radius">12dp</dimen>
+
+    <dimen name="stat_progress_bar_size">80dp</dimen>
+
+    <dimen name="stat_horizontal_margin">20dp</dimen>
+    <dimen name="stat_vertical_padding">16dp</dimen>
+
+    <dimen name="text_16">16sp</dimen>
+    <dimen name="text_26">26sp</dimen>
+</resources>

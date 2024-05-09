@@ -1,7 +1,7 @@
 package com.kostyarazboynik.feature_pokemon_list.ui.list_adapter.diffutil
 
 import androidx.recyclerview.widget.DiffUtil
-import com.kostyarazboynik.domain.model.Pokemon
+import com.kostyarazboynik.domain.model.pokemon.Pokemon
 
 class PokemonListDiffUtilCallback : DiffUtil.ItemCallback<Pokemon>() {
 

@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
+import com.kostyarazboynik.domain.model.pokemon.Pokemon
+import com.kostyarazboynik.feature_pokemon_details.ui.PokemonDetailsFragment
 import com.kostyarazboynik.feature_pokemon_list.dagger.FeaturePokemonListUiComponentProvider
 import com.kostyarazboynik.feature_pokemon_list.databinding.FragmentPokemonListLayoutBinding
 import com.kostyarazboynik.feature_pokemon_list.ui.list_adapter.LoadingStateAdapter
@@ -27,8 +29,9 @@ class PokemonListFragment : Fragment() {
 
     private lateinit var binding: FragmentPokemonListLayoutBinding
 
-    private val listAdapter: PokemonListAdapter
-        get() = binding.recyclerView.adapter as PokemonListAdapter
+    private val listAdapter = PokemonListAdapter { pokemon, picture ->
+        navigateToMovieDetailsFragment(pokemon, picture)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,17 +44,27 @@ class PokemonListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadData(false)
         setUpRecyclerView()
         setUpSwipeRefreshListener()
+        loadData(false)
+    }
+
+    private fun navigateToMovieDetailsFragment(pokemon: Pokemon, picture: String?) {
+        activity?.supportFragmentManager?.let { manager ->
+            arguments?.getInt(FRAME_CONTENT_ID)?.let { id ->
+                val transaction = manager.beginTransaction()
+                val fragment = PokemonDetailsFragment.newInstance(pokemon, picture)
+                transaction.replace(id, fragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
     }
 
     private fun setUpRecyclerView() {
         binding.apply {
             recyclerView.apply {
-                adapter = PokemonListAdapter {
-                    // TODO: navigate to details fragment
-                }.apply {
+                adapter = listAdapter.apply {
                     withLoadStateFooter(
                         footer = LoadingStateAdapter { listAdapter.retry() }
                     )
@@ -90,7 +103,7 @@ class PokemonListFragment : Fragment() {
 
     private fun loadData(submitEmpty: Boolean) {
         viewModel.loadData()
-        lifecycleScope.launchNamed("$TAG-lifecycleScope-loadData", Dispatchers.Default) {
+        viewModel.viewModelScope.launchNamed("$TAG-viewModelScope-loadData", Dispatchers.Default) {
             if (submitEmpty) listAdapter.submitData(PagingData.empty())
             viewModel.pagingDataStateFlow.collectLatest {
                 listAdapter.submitData(it)

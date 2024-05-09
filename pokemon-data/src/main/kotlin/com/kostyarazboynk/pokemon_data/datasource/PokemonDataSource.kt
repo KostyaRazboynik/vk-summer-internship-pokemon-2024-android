@@ -2,7 +2,7 @@ package com.kostyarazboynk.pokemon_data.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.kostyarazboynik.domain.model.Pokemon
+import com.kostyarazboynik.domain.model.pokemon.Pokemon
 import com.kostyarazboynik.pokemon_api.PokemonApi
 import com.kostyarazboynik.utils.Logger
 import com.kostyarazboynk.pokemon_data.mapper.toPokemon
@@ -19,10 +19,8 @@ class PokemonDataSource(
 
         return if (requestResult.isSuccess) {
             val data = requestResult.getOrThrow()
-            val d = data.pokemonList.map { it.toPokemon() }
-            Logger.d(TAG, d.toString())
             LoadResult.Page(
-                data = d,
+                data = data.pokemonList.map { it.toPokemon() },
                 prevKey = if (offset == STARTING_OFFSET_INDEX) null else offset - loadSize,
                 nextKey = if (data.next == null) null else offset + loadSize
             )

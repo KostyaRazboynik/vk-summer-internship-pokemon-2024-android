@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class StatDto(
     @SerialName("name") val name: String,
-    @SerialName("url") val url: String
+    @SerialName("url") val url: String,
 )
