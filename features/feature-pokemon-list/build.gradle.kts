@@ -40,6 +40,13 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.swiperefreshlayout)
 
-    // coil image loader
-    implementation(libs.coil)
+    // pagination
+    implementation(libs.androidx.paging)
+
+    // glide image loader
+    implementation(libs.glide)
+    annotationProcessor(libs.glide.compiler)
+
+    // palette
+    implementation(libs.androidx.palette)
 }

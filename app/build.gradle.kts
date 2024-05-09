@@ -51,6 +51,7 @@ dependencies {
     implementation(project(":features:feature-pokemon-details"))
     implementation(project(":features:feature-pokemon-list"))
     implementation(project(":pokemon-api"))
+    implementation(project(":pokemon-data"))
 
     implementation(libs.androidx.appcompat)
 

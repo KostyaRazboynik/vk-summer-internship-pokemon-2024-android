@@ -9,5 +9,5 @@ data class PokemonListResponse(
     @SerialName("count") val count: Int,
     @SerialName("next") val next: String?,
     @SerialName("previous") val previous: String?,
-    @SerialName("result") val pokemonList: List<PokemonDto>,
+    @SerialName("results") val pokemonList: List<PokemonDto>,
 )

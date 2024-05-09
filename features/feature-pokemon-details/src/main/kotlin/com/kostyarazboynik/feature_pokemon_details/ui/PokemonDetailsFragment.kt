@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.kostyarazboynik.feature_pokemon_details.dagger.FeaturePokemonDetailsUiComponentProvider
 import com.kostyarazboynik.feature_pokemon_details.databinding.FragmentPokemonDetailsLayoutBinding
 
-class PokemonDetailsFragment: Fragment() {
+class PokemonDetailsFragment : Fragment() {
 
     private val viewModel: PokemonDetailsViewModel by lazy {
         (context?.applicationContext as FeaturePokemonDetailsUiComponentProvider)

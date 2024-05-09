@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.kostyarazboynik.domain"
+    namespace = "com.kostyarazboynk.pokemon_data"
     compileSdk = 34
 
     defaultConfig {
@@ -22,8 +22,11 @@ android {
 
 dependencies {
     implementation(project(":core:utils"))
+    implementation(project(":domain"))
+    implementation(project(":pokemon-api"))
 
     implementation(libs.kotlinx.coroutines.core)
+
     implementation(libs.dagger)
 
     implementation(libs.androidx.paging)

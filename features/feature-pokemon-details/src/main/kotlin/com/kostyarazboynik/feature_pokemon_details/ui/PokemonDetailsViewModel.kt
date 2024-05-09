@@ -7,7 +7,7 @@ import javax.inject.Inject
 @FeatureScope
 class PokemonDetailsViewModel @Inject constructor(
 
-): ViewModel() {
+) : ViewModel() {
 
     companion object {
         private const val TAG = "PokemonDetailsViewModel"
